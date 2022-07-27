@@ -641,7 +641,7 @@ class AST_Catch(AST_Block):
 
 
 class AST_Except(AST_Block):
-    "An `except` node for python-lang, which resides inside the catch block"
+    "An `except` node for pylang, which resides inside the catch block"
     properties = {
         'argname': "[AST_SymbolCatch] symbol for the exception",
         'errors': "[AST_SymbolVar*] error classes to catch in this block"

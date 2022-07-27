@@ -13,7 +13,7 @@ import { deepEqual as origDeepEqual, AssertionError } from "assert";
 import { tmpdir } from "os";
 import { runInNewContext } from "vm";
 
-const JPython = createCompiler();
+const PyLang = createCompiler();
 
 export default function (
   argv: { files: string[] },
@@ -54,7 +54,7 @@ export default function (
         console.log(`Skipping ${filename}`);
         continue;
       }
-      toplevel = JPython.parse(file, {
+      toplevel = PyLang.parse(file, {
         filename,
         toplevel: toplevel,
         basedir: testPath,
@@ -68,7 +68,7 @@ export default function (
     }
 
     // generate output
-    const output = new JPython.OutputStream({
+    const output = new PyLang.OutputStream({
       baselib_plain: baselib,
       beautify: true,
       keep_docstrings: true,
@@ -97,7 +97,7 @@ export default function (
           __name__: jsfile,
           require: require,
           fs: require("fs"),
-          JPython,
+          PyLang,
           console,
           compiler_dir: compilerDir,
           test_path: testPath,

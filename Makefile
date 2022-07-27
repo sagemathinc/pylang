@@ -14,9 +14,9 @@ test:
 
 .PHONY: bench
 bench:
-	echo "STARTING python-lang benchmark suite"
-	npx python-lang `pwd`/bench/all.py
-	echo "FINISHED python-lang benchmark suite"
+	echo "STARTING pylang benchmark suite"
+	npx pylang `pwd`/bench/all.py
+	echo "FINISHED pylang benchmark suite"
 
 clean:
 	rm -rf ${DIST} node_modules

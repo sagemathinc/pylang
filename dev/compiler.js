@@ -8908,7 +8908,7 @@ undefined;
 
         var js_new = ρσ_modules.js.js_new;
 
-        COMPILER_VERSION = "acd40917d0032dda3bfa6b11c34f81818f0d4246";
+        COMPILER_VERSION = "862087251523f0dd124a227a9f5d77aae12eecd2";
         PYTHON_FLAGS = {"exponent":true,"ellipses":true,"numbers":true,"annotations":false,"dict_literals":true,"overload_getitem":true,"bound_methods":true,"hash_literals":true};
         function get_compiler_version() {
             return COMPILER_VERSION;

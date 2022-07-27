@@ -143,8 +143,8 @@ export function getImportDirs(paths_string?: string, ignore_env?: boolean) {
       paths.push(new_path);
     }
   }
-  if (!ignore_env && process?.env?.JPYTHONPATH) {
-    process.env.JPYTHONPATH.split(delimiter).forEach(merge);
+  if (!ignore_env && process?.env?.PYLANGPATH) {
+    process.env.PYLANGPATH.split(delimiter).forEach(merge);
   }
   if (paths_string) {
     paths_string.split(delimiter).forEach(merge);

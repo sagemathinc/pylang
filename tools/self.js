@@ -12,7 +12,7 @@ var fs = require("fs");
 var vm = require("vm");
 var zlib = require("zlib");
 
-function compile_baselib(JPython, src_path) {
+function compile_baselib(PyLang, src_path) {
   var items = fs
     .readdirSync(path.join(src_path, "baselib"))
     .filter(function (name) {
@@ -25,16 +25,16 @@ function compile_baselib(JPython, src_path) {
       ast;
     var raw = fs.readFileSync(path.join(src_path, "baselib", fname), "utf-8");
     try {
-      ast = JPython.parse(raw, {
+      ast = PyLang.parse(raw, {
         filename: fname,
         basedir: path.join(src_path, "baselib"),
       });
     } catch (e) {
-      if (!(e instanceof JPython.SyntaxError)) throw e;
+      if (!(e instanceof PyLang.SyntaxError)) throw e;
       console.error(e.toString());
       process.exit(1);
     }
-    var output = new JPython.OutputStream({
+    var output = new PyLang.OutputStream({
       beautify: true,
       write_name: false,
       private_scope: false,
@@ -114,9 +114,9 @@ import createCompiler from "./compiler";
 function compile(src_path, lib_path, sources, source_hash, profile) {
   var file = path.join(src_path, "compiler.py");
   var t1 = new Date().getTime();
-  var JPython = createCompiler();
+  var PyLang = createCompiler();
   var output_options, profiler, cpu_profile;
-  var compiled_baselib = compile_baselib(JPython, src_path);
+  var compiled_baselib = compile_baselib(PyLang, src_path);
   var out_path = path.join(path.dirname(lib_path), "dev");
   try {
     fs.mkdirSync(out_path);
@@ -129,7 +129,7 @@ function compile(src_path, lib_path, sources, source_hash, profile) {
     toplevel;
 
   function parse_file(code, file) {
-    return JPython.parse(code, {
+    return PyLang.parse(code, {
       filename: file,
       basedir: path.dirname(file),
       libdir: path.join(src_path, "lib"),
@@ -147,11 +147,11 @@ function compile(src_path, lib_path, sources, source_hash, profile) {
       fs.writeFileSync("self.cpuprofile", JSON.stringify(cpu_profile), "utf-8");
     }
   } catch (e) {
-    if (!(e instanceof JPython.SyntaxError)) throw e;
+    if (!(e instanceof PyLang.SyntaxError)) throw e;
     console.error(e.toString());
     process.exit(1);
   }
-  var output = new JPython.OutputStream(output_options);
+  var output = new PyLang.OutputStream(output_options);
   toplevel.print(output);
   output = output.get().replace("__COMPILER_VERSION__", source_hash);
   fs.writeFileSync(path.join(out_path, "compiler.js"), output, "utf8");

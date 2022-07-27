@@ -4,7 +4,7 @@ William Stein (SageMath, Inc.)
 
 ## Other Contributors
 
-See https://github.com/sagemathinc/python-lang/graphs/contributors
+See https://github.com/sagemathinc/pylang/graphs/contributors
 
 Also, people from the past projects this was forked from:
 

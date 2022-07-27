@@ -10,7 +10,7 @@ def get(obj, name):
 # Test the parsing of function definitions {{{
 
 def basic_test(code, arglen, starargs, kwargs, defaults):
-    func = JPython.parse('def func(' + code + '): pass\n', {'filename':code}).body[0]
+    func = PyLang.parse('def func(' + code + '): pass\n', {'filename':code}).body[0]
     eq(func.argnames.length, arglen)
     eq(get(func.argnames.starargs, 'name'), starargs)
     eq(get(func.argnames.kwargs, 'name'), kwargs)
@@ -24,8 +24,8 @@ def basic_test(code, arglen, starargs, kwargs, defaults):
 
 def throw_test(code):
     assrt.throws(def():
-        JPython.parse('def func(' + code + '): pass\n', {'filename':code}).body[0]
-    , JPython.SyntaxError)
+        PyLang.parse('def func(' + code + '): pass\n', {'filename':code}).body[0]
+    , PyLang.SyntaxError)
 
 basic_test('a, b, c', 3)
 basic_test('*args', 0, 'args')
@@ -49,7 +49,7 @@ throw_test('*a, **a')
 # Test parsing of function calls {{{
 
 def parse_call_test(code, arglen, opts):
-    func = JPython.parse('f(' + code + ')', {'filename':code}).body[0].body
+    func = PyLang.parse('f(' + code + ')', {'filename':code}).body[0].body
     opts = opts or {}
     eq(func.args.length, arglen, 'Incorrect len for: ' + code)
     if (opts.starargs != undefined):

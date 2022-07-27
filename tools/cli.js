@@ -78,7 +78,7 @@ function print_usage(group) {
   if (!group) {
     // Overall usage
     help =
-      "JPython can perform many actions, depending on which" +
+      "PyLang can perform many actions, depending on which" +
       "\nsubcommand is invoked. With no arguments, it will start a REPL," +
       "\nunless STDIN is a pipe, in which case it will compile whatever" +
       "\nyou pass on STDIN and write the output to STDOUT. See the full" +
@@ -298,7 +298,7 @@ function parse_args() {
 
 create_group("compile", "[input1.py input2.py ...]", function () {
   /*
-Compile JPython source code into JavaScript
+Compile PyLang source code into JavaScript
 output. You can also pipe the source code into
 stdin.
 */
@@ -312,7 +312,7 @@ Output file (default STDOUT)
 
 opt("bare", "b", "bool", false, function () {
   /*
-Remove the module wrapper that prevents JPython
+Remove the module wrapper that prevents PyLang
 scope from bleeding into other JavaScript logic
 */
 });
@@ -347,7 +347,7 @@ opt("import_path", "p", "string", "", function () {
 A list of paths in which to look for imported modules.
 Multiple paths must be separated by the path separator
 (: on Unix and ; on Windows). You can also use the
-environment variable JPYTHONPATH for this,
+environment variable PYLANGPATH for this,
 with identical syntax. Note that these directories
 are searched before the builtin paths, which means you
 can use them to replace builtin modules.
@@ -396,8 +396,8 @@ Display operations run time on STDERR.
 
 opt("execute", "x,exec", "bool", false, function () {
   /*
-Compile and execute the JPython code, all in
-one invocation. Useful if you wish to use JPython for
+Compile and execute the PyLang code, all in
+one invocation. Useful if you wish to use PyLang for
 scripting. Note that you can also use the -o option to
 have the compiled JavaScript written out to a file
 before being executed. If you specify this option you
@@ -409,7 +409,7 @@ execution will fail.
 create_group("repl", "", function () {
   /*
 Run a Read-Eval-Print-Loop (REPL). This allows
-you to type and run JPython at a live
+you to type and run PyLang at a live
 command prompt.  Type show_js=True to show Javascript.
 */
 });
@@ -438,7 +438,7 @@ create_group(
   "[input1.py input2.py ...]",
   function () {
     /*
-Run the JPython linter. This will find various
+Run the PyLang linter. This will find various
 possible problems in the .py files you specify and
 write messages about them to stdout. Use - to read from STDIN.
 The main check it performs is for unused/undefined
@@ -539,7 +539,7 @@ STDIN is used.
 
 create_group("test", "[test1 test2...]", function () {
   /*
-Run JPython tests. You can specify the name of
+Run PyLang tests. You can specify the name of
 individual test files to only run tests from those
 files. For example:
 test baselib functions

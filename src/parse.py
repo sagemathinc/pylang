@@ -905,7 +905,7 @@ def create_parser_ctx(S, import_dirs, module_id, baselib_items,
         })
 
     def mock_typing_module():
-        # This enables us to fully use mypy with python-lang code.
+        # This enables us to fully use mypy with pylang code.
         # See test/typing_.py for an example.
         expect_token("keyword", "import")
         bracketed = is_('punc', '(')
@@ -1641,7 +1641,7 @@ def create_parser_ctx(S, import_dirs, module_id, baselib_items,
                 next()
                 if is_('punc', ')'):
                     next()
-                    # since we don't have tuples in python-lang (yet?)...
+                    # since we don't have tuples in pylang (yet?)...
                     return AST_Array({'elements': []})
                 ex = expression(True)
                 if is_('keyword', 'for'):

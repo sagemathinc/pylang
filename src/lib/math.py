@@ -1,16 +1,16 @@
 ###########################################################
-# python-lang Standard Library
+# pylang Standard Library
 # Author: Alexander Tsepkov
 # Copyright 2013 Pyjeon Software LLC
 # License: Apache License    2.0
 # This library is covered under Apache license, so that
-# you can distribute it with your python-lang applications.
+# you can distribute it with your pylang applications.
 ###########################################################
 
 # basic implementation of Python's 'math' library
 
-# NOTE: this is only meant to aid those porting lots of Python code into python-lang.
-# If you're writing a new python-lang application, in most cases you probably want to
+# NOTE: this is only meant to aid those porting lots of Python code into pylang.
+# If you're writing a new pylang application, in most cases you probably want to
 # use JavaScript's Math module directly instead
 
 pi = Math.PI

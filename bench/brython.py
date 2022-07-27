@@ -246,8 +246,8 @@ def create_instance_of_simple_class(n=1000000):
 register("create instance of simple class", create_instance_of_simple_class)
 
 
-# The above timing is currently much worse in python-lang than python or pypy.
-# This is because classes in python-lang are not written using ES6 classes, which
+# The above timing is currently much worse in pylang than python or pypy.
+# This is because classes in pylang are not written using ES6 classes, which
 # will make this massively faster (i.e., 100x!)
 def create_instance_of_simple_jsclass(n=1000000):
     class A:

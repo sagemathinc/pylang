@@ -1,4 +1,4 @@
-# TODO List of little things that I want to change in python-lang
+# TODO List of little things that I want to change in pylang
 
 ## Not Done
 
@@ -29,13 +29,13 @@ to that makes it **much** faster. This is very important for math. We're talking
 
 ---
 
-[ ] include context in parse errors, e.g., python-lang versus python:
+[ ] include context in parse errors, e.g., pylang versus python:
 
 ```bash
-~/jsage/packages/python-lang/test$ python-lang lambda.py
+~/jsage/packages/pylang/test$ pylang lambda.py
 lambda.py:Unexpected token: punc ']' (line: 39, col: 33, pos: 667)
-~/jsage/packages/python-lang/test$ python lambda.py
-  File "/home/user/jsage/packages/python-lang/test/lambda.py", line 39
+~/jsage/packages/pylang/test$ python lambda.py
+  File "/home/user/jsage/packages/pylang/test/lambda.py", line 39
     assert v[1] == {'world': 'there'}]
                                      ^
 SyntaxError: unmatched ']'
@@ -50,7 +50,7 @@ SyntaxError: unmatched ']'
 [ ] implement `__call__` dunder method. Actually NO -- I tried this and it's **just too slow.** The JIT just isn't good enough to deal with this. In fact, this should help clarify our tradeoffs. Similar remark about dealing with `new`.
 
 - [x] Did implement the easy special case of `identifier(foo...)`.
-- Actually, if I change the classes that python-lang produces to be ES6 classes (which I plan to do), then https://www.npmjs.com/package/callable-instance provides a nice efficient solution. Just generate a javascript class that is itself callable. It will also work from Javascript (not just python-lang). It's efficient when in use, though surely making the callable object in the first place is slower, though for my application that is fine. Also [this approach](https://stackoverflow.com/questions/19335983/can-you-make-an-object-callable) for old non-ES6.
+- Actually, if I change the classes that pylang produces to be ES6 classes (which I plan to do), then https://www.npmjs.com/package/callable-instance provides a nice efficient solution. Just generate a javascript class that is itself callable. It will also work from Javascript (not just pylang). It's efficient when in use, though surely making the callable object in the first place is slower, though for my application that is fine. Also [this approach](https://stackoverflow.com/questions/19335983/can-you-make-an-object-callable) for old non-ES6.
 
 [ ] implement `__eq__`, `__ne__` dunder methods?
 
@@ -94,7 +94,7 @@ I added some...
 [ ] Rewrite the tests to use builtin assert statement, rather than the Javascript assrt module, so can use pytest in some cases at least (i.e., to check that results are the same as with Python... unless otherwise noted!). Make sure every test in the test suite (except special jsage extensions) works equally well with Pure python via pytest. Also, is maybe rewrite a little of pytest to do our testing?
 
 [ ] Bug in tuple unpacking:
-In python-lang:
+In pylang:
 
 ```py
 >>> [a,[b,c]] = [1,[[17,23],3]]
@@ -161,8 +161,8 @@ This broke bench/nbody.py pretty badly...
 [x] parenthesis line continuation (a nice newer feature of python), e.g. this:
 
 ```py
-~/jsage/packages/python-lang$ python-lang
-Welcome to python-lang.  Using Node.js v16.7.0.
+~/jsage/packages/pylang$ pylang
+Welcome to pylang.  Using Node.js v16.7.0.
 >>> # this shouldn't be broken
 >>> a = (1,
 ... 2)
@@ -177,7 +177,7 @@ Welcome to python-lang.  Using Node.js v16.7.0.
 
 [x] implement normal python lambda functions
 
-[x] sage preparser style mode that makes `^` be exponentiation. Have a bin script `jsage` (instead of `python-lang`) that enables this mode everywhere.
+[x] sage preparser style mode that makes `^` be exponentiation. Have a bin script `jsage` (instead of `pylang`) that enables this mode everywhere.
 
 - repl has --jsage mode for interaction with everything enabled, but only for interactive use
 - for files, instead of .sage files, we have .py files with lines like this at the top:
@@ -197,7 +197,7 @@ Things I might want: exponents, [a..b] syntax for ranges (it's a PEP), arbitrary
 
 ---
 
-[x] Alternative to raw "v"-strings. These are not valid Python, hence they break all Python tooling (e.g., syntax highlighting, formatting, running the module under real Python, etc.). Instead, replace them by a function call with a normal string. With v-strings you can't even load the code into normal Python since it gets stopped at the parsing stage. It's much better if it is at runtime for normal Python, so you can run the same code with both python-lang and normal Python. Example, it would be nice to make something like this possible:
+[x] Alternative to raw "v"-strings. These are not valid Python, hence they break all Python tooling (e.g., syntax highlighting, formatting, running the module under real Python, etc.). Instead, replace them by a function call with a normal string. With v-strings you can't even load the code into normal Python since it gets stopped at the parsing stage. It's much better if it is at runtime for normal Python, so you can run the same code with both pylang and normal Python. Example, it would be nice to make something like this possible:
 
 ```py
 def hello():

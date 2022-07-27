@@ -4,7 +4,7 @@ from bench import register, all
 
 try:
     from __python__ import xxx
-    # python-lang (and also needs jsage)... TODO: switch to something in Javascript!!
+    # pylang (and also needs jsage)... TODO: switch to something in Javascript!!
     complex = require('@jsage/lib/complex/complex').ComplexNumber
 except:
     pass

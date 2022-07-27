@@ -144,7 +144,7 @@ def function_annotation(self, output, strip_first, name):
     # otherwise trying to use them with a mocked typings module
     # doesn't work at all.  For now we just ignore this data
     # and mock typings, so you can fully typecheck code with mypy
-    # while still *running* it with python-lang.
+    # while still *running* it with pylang.
     if self.annotations and has_annotations(self):
 
         def annotations():

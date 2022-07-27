@@ -12,7 +12,7 @@ import { runInThisContext } from "vm";
 import { getImportDirs, once } from "./utils";
 import createCompiler from "./compiler";
 
-const JPython = createCompiler();
+const PyLang = createCompiler();
 
 // TODO
 type Parsed = any;
@@ -92,7 +92,7 @@ export default async function Compile({
   const count = files.length || 1;
 
   function parseFile(code: string, filename: string): Parsed {
-    return JPython.parse(code, {
+    return PyLang.parse(code, {
       filename,
       basedir: filename !== "<stdin>" ? dirname(filename) : undefined,
       libdir: join(src_path, "lib"),
@@ -143,7 +143,7 @@ export default async function Compile({
       try {
         topLevel = parseFile(code, filename);
       } catch (err) {
-        if (!(err instanceof JPython.SyntaxError)) {
+        if (!(err instanceof PyLang.SyntaxError)) {
           throw err;
         }
         console.error(err.toString());
@@ -153,9 +153,9 @@ export default async function Compile({
 
     let output;
     try {
-      output = new JPython.OutputStream(outputOptions);
+      output = new PyLang.OutputStream(outputOptions);
     } catch (err) {
-      if (err instanceof JPython.DefaultsError) {
+      if (err instanceof PyLang.DefaultsError) {
         console.error(err.message);
         process.exit(1);
       }

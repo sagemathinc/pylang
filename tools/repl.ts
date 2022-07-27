@@ -73,7 +73,7 @@ function replDefaults(options: Partial<Options>): Options {
     options.terminal = !!options.output?.isTTY;
   }
   if (options.histfile == null) {
-    const CACHE = join(CACHEDIR, "jpython");
+    const CACHE = join(CACHEDIR, "pylang");
     if (!pathExists(CACHE)) {
       mkdirSync(CACHE, { recursive: true });
     }
@@ -108,9 +108,9 @@ function writeHistory(options: Options, history: string[]): void {
   }
 }
 
-function createReadlineInterface(options: Options, JPython) {
+function createReadlineInterface(options: Options, PyLang) {
   // See https://nodejs.org/api/readline.html#readline_readline_createinterface_options
-  const completer = Completer(JPython);
+  const completer = Completer(PyLang);
   const history = options.terminal ? readHistory(options) : [];
   const readline = (options.mockReadline ?? createInterface)({
     input: options.input,
@@ -128,10 +128,10 @@ function createReadlineInterface(options: Options, JPython) {
 
 export default async function Repl(options0: Partial<Options>): Promise<void> {
   const options = replDefaults(options0);
-  const JPython = createCompiler({
+  const PyLang = createCompiler({
     console: options.console,
   });
-  const readline = createReadlineInterface(options, JPython);
+  const readline = createReadlineInterface(options, PyLang);
   const colorize = options.mockReadline
     ? (string, _color?, _bold?) => string
     : colored;
@@ -157,7 +157,7 @@ export default async function Repl(options0: Partial<Options>): Promise<void> {
   if (process.stdin.isTTY) {
     options.console.log(
       colorize(
-        `Welcome to python-lang.  Using Node.js ${
+        `Welcome to pylang.  Using Node.js ${
           process.version
         }.  ${
           options.jsage ? "\nType dir(jsage) for available functions." : ""
@@ -169,7 +169,7 @@ export default async function Repl(options0: Partial<Options>): Promise<void> {
   }
 
   function printAST(ast, keepBaselib?: boolean) {
-    const output = new JPython.OutputStream({
+    const output = new PyLang.OutputStream({
       omit_baselib: !keepBaselib,
       write_name: false,
       private_scope: false,
@@ -188,7 +188,7 @@ export default async function Repl(options0: Partial<Options>): Promise<void> {
     global.require = require;
 
     // and get all the code and name.
-    runInThisContext(printAST(JPython.parse("(def ():\n yield 1\n)"), true));
+    runInThisContext(printAST(PyLang.parse("(def ():\n yield 1\n)"), true));
     runInThisContext('var __name__ = "__repl__"; show_js=false;');
     if (options.jsage) {
       const BLOCK = true;
@@ -274,7 +274,7 @@ export default async function Repl(options0: Partial<Options>): Promise<void> {
     const classes = toplevel?.classes;
     const scoped_flags = toplevel?.scoped_flags;
     try {
-      toplevel = JPython.parse(source, {
+      toplevel = PyLang.parse(source, {
         filename: "<repl>",
         basedir: process.cwd(),
         libdir: importPath,

@@ -5,9 +5,9 @@ import traceback
 
 def throw_test(code):
     def parse():
-        JPython.parse(code, {'filename': code}).body[0]
+        PyLang.parse(code, {'filename': code}).body[0]
 
-    assrt.throws(parse, JPython.SyntaxError)
+    assrt.throws(parse, PyLang.SyntaxError)
 
 
 # unary operators

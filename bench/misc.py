@@ -1,7 +1,7 @@
 from bench import register, all
 
 
-# python-lang is really bad at these, since Javascript
+# pylang is really bad at these, since Javascript
 # doesn't really have a notion of generic lists.
 def list_times_number(n=100):
     for i in range(n):
