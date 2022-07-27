@@ -1,0 +1,46 @@
+{
+  "name": "python-lang",
+  "version": "1.0.0",
+  "description": "Use Javascript via the Python language.",
+  "homepage": "https://github.com/sagemathinc/python-wasm/tree/main/packages/python-lang",
+  "keywords": [
+    "javascript",
+    "python",
+    "language",
+    "compiler"
+  ],
+  "main": "tools/compiler.js",
+  "scripts": {
+    "test": "npx tsc && ./bin/python-lang self --complete --test && cd bench && ../bin/python-lang all.py",
+    "start": "node bin/python-lang",
+    "build": "npx tsc && node bin/python-lang self --complete",
+    "tsc": "npx tsc -w",
+    "clean": "rm -rf dist",
+    "format": "npm run yapf && npm run prettier",
+    "mypy": "git grep -l '^# mypy' | xargs mypy",
+    "prettier": "prettier --write .",
+    "yapf": "yapf -p -i --recursive src/output bench src/compiler.py src/parse.py src/utils.py  src/tokenizer.py"
+  },
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">=0.14.0"
+  },
+  "maintainers": [
+    {
+      "name": "William Stein",
+      "email": "wstein@sagemath.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sagemathinc/python-wasm"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  },
+  "bin": {
+    "python-lang": "bin/python-lang"
+  }
+}
