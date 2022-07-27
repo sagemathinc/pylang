@@ -2,7 +2,7 @@
   "name": "python-lang",
   "version": "1.0.0",
   "description": "Use Javascript via the Python language.",
-  "homepage": "https://github.com/sagemathinc/python-wasm/tree/main/packages/python-lang",
+  "homepage": "https://github.com/sagemathinc/python-lang#readme",
   "keywords": [
     "javascript",
     "python",
@@ -33,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/sagemathinc/python-wasm"
+    "url": "https://github.com/sagemathinc/python-lang"
   },
   "devDependencies": {
     "@types/node": "^18.6.1",
